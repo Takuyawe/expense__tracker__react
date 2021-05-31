@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardContent, Typography } from "@material-ui/core";
-import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import useTransactions from "../../useTransactions";
 
 import useStyles from "./styles";
@@ -11,10 +11,10 @@ const Details = ({ title }) => {
 
   return (
     <Card className={title === "Income" ? classes.income : classes.expense}>
-      <CardHeader title={title} />
+      <CardHeader title={title} align="center" />
       <CardContent>
-        <Typography variant="h5">${total}</Typography>
-        <Bar data={chartData} />
+        <Typography variant="h5">Total: ${total}</Typography>
+        <Doughnut data={chartData} />
       </CardContent>
     </Card>
   );

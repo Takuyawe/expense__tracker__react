@@ -28,7 +28,19 @@ const initialState = {
 const Form = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
-  const { addTransaction } = useContext(ExpenseTrackerContext);
+  const { addTransaction, transactions } = useContext(ExpenseTrackerContext);
+
+  const incomeAggregate = transactions.filter((t) => t.type === "Income");
+  const incomeTotal = incomeAggregate.reduce(
+    (acc, currVal) => (acc += currVal.amount),
+    0
+  );
+  const expenseAggregate = transactions.filter((t) => t.type === "Expense");
+  const expenseTotal = expenseAggregate.reduce(
+    (acc, currVal) => (acc += currVal.amount),
+    0
+  );
+  const total = incomeTotal - expenseTotal;
 
   const createTransaction = () => {
     const transaction = {
@@ -44,10 +56,15 @@ const Form = () => {
     formData.type === "Income" ? incomeCategories : expenseCategories;
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={classes.grid}>
       <Grid item xs={12}>
-        <Typography align="center" variant="subtitle2" gutterBottom>
-          ...
+        <Typography
+          align="center"
+          variant="h5"
+          gutterBottom
+          style={{ marginTop: "20px" }}
+        >
+          Total Balance: $ {total}
         </Typography>
       </Grid>
       <Grid item xs={6}>
@@ -92,6 +109,7 @@ const Form = () => {
         <TextField
           type="date"
           label="Date"
+          InputLabelProps={{ shrink: true }}
           fullWidth
           value={formData.Date}
           onChange={(e) =>

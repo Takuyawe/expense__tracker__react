@@ -3,7 +3,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Typography,
   Grid,
   Divider,
 } from "@material-ui/core";
@@ -15,21 +14,8 @@ const Main = () => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardHeader title="Expense Tracker" />
+      <CardHeader title="Expense Tracker" align="center" />
       <CardContent>
-        <Typography align="center" variant="h5">
-          Total Balance $100
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          style={{
-            lineHeight: "1.5em",
-            marginTop: "20px",
-            textAlign: "center",
-          }}
-        >
-          Select the type first
-        </Typography>
         <Divider />
         <Form />
       </CardContent>
